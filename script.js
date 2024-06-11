@@ -20,3 +20,46 @@ let getHumanChoice = function () {
     return getHumanChoice();
   }
 };
+
+let computerScore = 0;
+let humanScore = 0;
+
+let capitalizeFirstLetter = function (str) {
+  let firstLetter = str[0];
+  let rest = str.substring(1);
+
+  firstLetter = firstLetter.toUpperCase();
+  return firstLetter + rest;
+};
+
+let playRound = function () {
+  let computerChoice = getComputerChoice();
+  let humanChoice = getHumanChoice();
+
+  console.log(`You chose ${capitalizeFirstLetter(humanChoice)}`);
+  console.log(`Computer chose ${capitalizeFirstLetter(computerChoice)}`);
+
+  if (
+    (computerChoice == "rock" && humanChoice == "paper") ||
+    (computerChoice == "paper" && humanChoice == "scissors") ||
+    (computerChoice == "scissors" && humanChoice == "rock")
+  ) {
+    console.log(
+      `You win! ${capitalizeFirstLetter(
+        humanChoice
+      )} beats ${capitalizeFirstLetter(computerChoice)}`
+    );
+    humanScore++;
+  } else if (
+    (computerChoice == "paper" && humanChoice == "rock") ||
+    (computerChoice == "scissors" && humanChoice == "paper") ||
+    (computerChoice == "rock" && humanChoice == "scissors")
+  ) {
+    console.log(
+      `You lose! ${capitalizeFirstLetter(
+        computerChoice
+      )} beats ${capitalizeFirstLetter(humanChoice)}`
+    );
+    computerScore++;
+  }
+};
