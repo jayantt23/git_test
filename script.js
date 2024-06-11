@@ -1,4 +1,7 @@
-let getComputerChoice = function () {
+let computerScore = 0;
+let humanScore = 0;
+
+const getComputerChoice = function () {
   let randomNumber = Math.floor(Math.random() * 100) % 3;
 
   if (randomNumber == 0) return "rock";
@@ -6,7 +9,7 @@ let getComputerChoice = function () {
   else if (randomNumber == 2) return "scissors";
 };
 
-let getHumanChoice = function () {
+const getHumanChoice = function () {
   let choice = prompt("Enter your choice:");
   choice = choice.toLowerCase();
 
@@ -21,10 +24,7 @@ let getHumanChoice = function () {
   }
 };
 
-let computerScore = 0;
-let humanScore = 0;
-
-let capitalizeFirstLetter = function (str) {
+const capitalizeFirstLetter = function (str) {
   let firstLetter = str[0];
   let rest = str.substring(1);
 
@@ -32,7 +32,7 @@ let capitalizeFirstLetter = function (str) {
   return firstLetter + rest;
 };
 
-let playRound = function () {
+const playRound = function () {
   let computerChoice = getComputerChoice();
   let humanChoice = getHumanChoice();
 
@@ -61,5 +61,43 @@ let playRound = function () {
       )} beats ${capitalizeFirstLetter(humanChoice)}`
     );
     computerScore++;
+  } else {
+    console.log("There's a tie!");
   }
 };
+
+const showScore = function () {
+  console.log("       SCOREBOARD        ");
+  console.log("*************************");
+  console.log(`Computer: ${computerScore}`);
+  console.log(`Human:    ${humanScore}`);
+  console.log("*************************");
+};
+
+const playGame = function () {
+  computerScore = 0;
+  humanScore = 0;
+
+  console.clear();
+  console.log("*************************");
+  showScore();
+  console.log("There will be five rounds, let's begin!");
+
+  for (let i = 0; i < 5; i++) {
+    playRound();
+    console.log("*************************");
+  }
+
+  showScore();
+  if (computerScore > humanScore) {
+    console.log("Computer wins the game!");
+  } else if (humanScore > computerScore) {
+    console.log("Human wins the game!");
+  } else {
+    console.log("It's a tie!");
+  }
+};
+
+const startButton = document.querySelector("button");
+
+startButton.addEventListener("click", playGame);
